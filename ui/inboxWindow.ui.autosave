@@ -48,19 +48,6 @@
        <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="5">
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="2" column="8" alignment="Qt::AlignRight">
         <widget class="QLabel" name="total_messages_label">
          <property name="font">
@@ -76,6 +63,78 @@
           <string>Messages: </string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="4" alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="action_label">
+         <property name="font">
+          <font>
+           <family>Montserrat</family>
+           <pointsize>19</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white;</string>
+         </property>
+         <property name="text">
+          <string>Messages</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="7" alignment="Qt::AlignRight">
+        <widget class="QLabel" name="total_senders_label">
+         <property name="font">
+          <font>
+           <family>Montserrat</family>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white;</string>
+         </property>
+         <property name="text">
+          <string>Senders: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="5">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="6">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item row="4" column="1" rowspan="3" colspan="9">
         <widget class="QStackedWidget" name="stackedWidget">
@@ -97,7 +156,7 @@
 }</string>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="all_senders_screen">
           <property name="font">
@@ -812,22 +871,6 @@ padding-bottom: 20px;</string>
          </widget>
         </widget>
        </item>
-       <item row="2" column="7" alignment="Qt::AlignRight">
-        <widget class="QLabel" name="total_senders_label">
-         <property name="font">
-          <font>
-           <family>Montserrat</family>
-           <pointsize>15</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: white;</string>
-         </property>
-         <property name="text">
-          <string>Senders: </string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="1" alignment="Qt::AlignLeft">
         <widget class="QListWidget" name="accountsList">
          <property name="minimumSize">
@@ -961,49 +1004,6 @@ QPushButton:disabled{
           </size>
          </property>
         </widget>
-       </item>
-       <item row="2" column="4" alignment="Qt::AlignHCenter">
-        <widget class="QLabel" name="action_label">
-         <property name="font">
-          <font>
-           <family>Montserrat</family>
-           <pointsize>19</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: white;</string>
-         </property>
-         <property name="text">
-          <string>Messages</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="6">
-        <spacer name="horizontalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>

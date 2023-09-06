@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1053, 582)
+        MainWindow.resize(1200, 637)
         MainWindow.setMinimumSize(QtCore.QSize(520, 0))
         MainWindow.setStyleSheet("QMainWindow{\n"
 "    background-color: rgb(11, 1, 55);\n"
@@ -35,6 +35,16 @@ class Ui_MainWindow(object):
         self.groupBox.setObjectName("groupBox")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_2.setObjectName("gridLayout_2")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem, 2, 5, 1, 1)
+        self.total_messages_label = QtWidgets.QLabel(self.groupBox)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(15)
+        self.total_messages_label.setFont(font)
+        self.total_messages_label.setStyleSheet("color: white;")
+        self.total_messages_label.setObjectName("total_messages_label")
+        self.gridLayout_2.addWidget(self.total_messages_label, 2, 8, 1, 1, QtCore.Qt.AlignRight)
         self.stackedWidget = QtWidgets.QStackedWidget(self.groupBox)
         self.stackedWidget.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
@@ -42,6 +52,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setFont(font)
         self.stackedWidget.setStyleSheet("QStackedWidget{\n"
 "    background-color: rrgb(48, 33, 86);\n"
+"    border-top: 1px solid grey;\n"
 "}")
         self.stackedWidget.setObjectName("stackedWidget")
         self.all_senders_screen = QtWidgets.QWidget()
@@ -51,83 +62,29 @@ class Ui_MainWindow(object):
         self.all_senders_screen.setObjectName("all_senders_screen")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.all_senders_screen)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.groupBox_2 = QtWidgets.QGroupBox(self.all_senders_screen)
+        self.groupBox_5 = QtWidgets.QGroupBox(self.all_senders_screen)
+        self.groupBox_5.setMaximumSize(QtCore.QSize(16777215, 60))
+        self.groupBox_5.setTitle("")
+        self.groupBox_5.setObjectName("groupBox_5")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.groupBox_5)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.msg_sort_option = QtWidgets.QComboBox(self.groupBox_5)
+        self.msg_sort_option.setObjectName("msg_sort_option")
+        self.msg_sort_option.addItem("")
+        self.msg_sort_option.addItem("")
+        self.msg_sort_option.addItem("")
+        self.horizontalLayout_2.addWidget(self.msg_sort_option, 0, QtCore.Qt.AlignLeft)
+        self.select_msgs_chkbox = QtWidgets.QCheckBox(self.groupBox_5)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
         font.setPointSize(15)
-        self.groupBox_2.setFont(font)
-        self.groupBox_2.setAutoFillBackground(False)
-        self.groupBox_2.setStyleSheet("\n"
-"QGroupBox{\n"
-"border: 1px solid grey;\n"
-"\n"
-"}\n"
-"")
-        self.groupBox_2.setTitle("")
-        self.groupBox_2.setObjectName("groupBox_2")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.groupBox_2)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.total_senders_label = QtWidgets.QLabel(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.total_senders_label.setFont(font)
-        self.total_senders_label.setStyleSheet("color: white;")
-        self.total_senders_label.setObjectName("total_senders_label")
-        self.verticalLayout_2.addWidget(self.total_senders_label)
-        self.total_messages_label = QtWidgets.QLabel(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.total_messages_label.setFont(font)
-        self.total_messages_label.setStyleSheet("color: white;")
-        self.total_messages_label.setObjectName("total_messages_label")
-        self.verticalLayout_2.addWidget(self.total_messages_label)
-        self.line_2 = QtWidgets.QFrame(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        self.line_2.setFont(font)
-        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_2.setObjectName("line_2")
-        self.verticalLayout_2.addWidget(self.line_2)
-        self.set_select_check = QtWidgets.QCheckBox(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.set_select_check.setFont(font)
-        self.set_select_check.setStyleSheet("color: white;")
-        self.set_select_check.setObjectName("set_select_check")
-        self.verticalLayout_2.addWidget(self.set_select_check)
-        self.sort_option = QtWidgets.QComboBox(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.sort_option.setFont(font)
-        self.sort_option.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.sort_option.setStyleSheet("color: white;")
-        self.sort_option.setFrame(True)
-        self.sort_option.setObjectName("sort_option")
-        self.sort_option.addItem("")
-        self.sort_option.addItem("")
-        self.sort_option.addItem("")
-        self.verticalLayout_2.addWidget(self.sort_option)
-        self.line_3 = QtWidgets.QFrame(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        self.line_3.setFont(font)
-        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_3.setObjectName("line_3")
-        self.verticalLayout_2.addWidget(self.line_3)
-        self.delete_all_button = QtWidgets.QPushButton(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.delete_all_button.setFont(font)
-        self.delete_all_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.delete_all_button.setStyleSheet("QPushButton {\n"
-"    width: 80px;\n"
+        self.select_msgs_chkbox.setFont(font)
+        self.select_msgs_chkbox.setObjectName("select_msgs_chkbox")
+        self.horizontalLayout_2.addWidget(self.select_msgs_chkbox)
+        self.delete_message_button = QtWidgets.QPushButton(self.groupBox_5)
+        self.delete_message_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.delete_message_button.setStyleSheet("QPushButton {\n"
+"    width: 30px;\n"
 "    height: 25px;\n"
 "    color: black;\n"
 "    text-align: center;\n"
@@ -146,20 +103,16 @@ class Ui_MainWindow(object):
 "    background-color:  rgb(123, 124, 125);\n"
 "    border: 2px solid black;\n"
 "}")
+        self.delete_message_button.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui/../icons/delete_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.delete_all_button.setIcon(icon)
-        self.delete_all_button.setIconSize(QtCore.QSize(18, 18))
-        self.delete_all_button.setObjectName("delete_all_button")
-        self.verticalLayout_2.addWidget(self.delete_all_button)
-        self.trash_all_button = QtWidgets.QPushButton(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.trash_all_button.setFont(font)
-        self.trash_all_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.trash_all_button.setStyleSheet("QPushButton {\n"
-"    width: 80px;\n"
+        self.delete_message_button.setIcon(icon)
+        self.delete_message_button.setObjectName("delete_message_button")
+        self.horizontalLayout_2.addWidget(self.delete_message_button, 0, QtCore.Qt.AlignLeft)
+        self.trash_message_button = QtWidgets.QPushButton(self.groupBox_5)
+        self.trash_message_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.trash_message_button.setStyleSheet("QPushButton {\n"
+"    width: 30px;\n"
 "    height: 25px;\n"
 "    color: black;\n"
 "    text-align: center;\n"
@@ -178,21 +131,16 @@ class Ui_MainWindow(object):
 "    background-color:  rgb(123, 124, 125);\n"
 "    border: 2px solid black;\n"
 "}")
+        self.trash_message_button.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("ui/../icons/trash_bin.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.trash_all_button.setIcon(icon1)
-        self.trash_all_button.setIconSize(QtCore.QSize(18, 18))
-        self.trash_all_button.setObjectName("trash_all_button")
-        self.verticalLayout_2.addWidget(self.trash_all_button)
-        self.view_msgs_button = QtWidgets.QPushButton(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        font.setBold(False)
-        self.view_msgs_button.setFont(font)
-        self.view_msgs_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.view_msgs_button.setStyleSheet("QPushButton {\n"
-"    width: 80px;\n"
+        self.trash_message_button.setIcon(icon1)
+        self.trash_message_button.setObjectName("trash_message_button")
+        self.horizontalLayout_2.addWidget(self.trash_message_button, 0, QtCore.Qt.AlignLeft)
+        self.open_browser_bttn = QtWidgets.QPushButton(self.groupBox_5)
+        self.open_browser_bttn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.open_browser_bttn.setStyleSheet("QPushButton {\n"
+"    width: 30px;\n"
 "    height: 25px;\n"
 "    color: black;\n"
 "    text-align: center;\n"
@@ -211,13 +159,98 @@ class Ui_MainWindow(object):
 "    background-color:  rgb(123, 124, 125);\n"
 "    border: 2px solid black;\n"
 "}")
+        self.open_browser_bttn.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui/../icons/view_msg.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.view_msgs_button.setIcon(icon2)
-        self.view_msgs_button.setIconSize(QtCore.QSize(17, 16))
-        self.view_msgs_button.setObjectName("view_msgs_button")
-        self.verticalLayout_2.addWidget(self.view_msgs_button)
-        self.unsubscribe_button = QtWidgets.QPushButton(self.groupBox_2)
+        icon2.addPixmap(QtGui.QPixmap("ui/../icons/open_web.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.open_browser_bttn.setIcon(icon2)
+        self.open_browser_bttn.setObjectName("open_browser_bttn")
+        self.horizontalLayout_2.addWidget(self.open_browser_bttn, 0, QtCore.Qt.AlignLeft)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.gridLayout_3.addWidget(self.groupBox_5, 0, 3, 1, 1)
+        self.groupBox_4 = QtWidgets.QGroupBox(self.all_senders_screen)
+        self.groupBox_4.setMaximumSize(QtCore.QSize(16777215, 60))
+        self.groupBox_4.setTitle("")
+        self.groupBox_4.setObjectName("groupBox_4")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox_4)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.sort_option = QtWidgets.QComboBox(self.groupBox_4)
+        self.sort_option.setObjectName("sort_option")
+        self.sort_option.addItem("")
+        self.sort_option.addItem("")
+        self.sort_option.addItem("")
+        self.horizontalLayout.addWidget(self.sort_option, 0, QtCore.Qt.AlignLeft)
+        self.set_select_check = QtWidgets.QCheckBox(self.groupBox_4)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(15)
+        self.set_select_check.setFont(font)
+        self.set_select_check.setStyleSheet("color: white;")
+        self.set_select_check.setObjectName("set_select_check")
+        self.horizontalLayout.addWidget(self.set_select_check)
+        self.delete_all_button = QtWidgets.QPushButton(self.groupBox_4)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(15)
+        self.delete_all_button.setFont(font)
+        self.delete_all_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.delete_all_button.setStyleSheet("QPushButton {\n"
+"    width: 30px;\n"
+"    height: 25px;\n"
+"    color: black;\n"
+"    text-align: center;\n"
+"    border-radius: 10px;\n"
+"    background-color: rgb(255, 101, 118);\n"
+"    border: 2px solid black;\n"
+"}\n"
+"QPushButton::hover {\n"
+"    background-color:  rgb(245, 85, 96);\n"
+"    border: 0px;\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    \n"
+"}\n"
+"QPushButton:disabled{\n"
+"    background-color:  rgb(123, 124, 125);\n"
+"    border: 2px solid black;\n"
+"}")
+        self.delete_all_button.setText("")
+        self.delete_all_button.setIcon(icon)
+        self.delete_all_button.setIconSize(QtCore.QSize(18, 18))
+        self.delete_all_button.setObjectName("delete_all_button")
+        self.horizontalLayout.addWidget(self.delete_all_button, 0, QtCore.Qt.AlignLeft)
+        self.trash_all_button = QtWidgets.QPushButton(self.groupBox_4)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(15)
+        self.trash_all_button.setFont(font)
+        self.trash_all_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.trash_all_button.setStyleSheet("QPushButton {\n"
+"    width: 30px;\n"
+"    height: 25px;\n"
+"    color: black;\n"
+"    text-align: center;\n"
+"    border-radius: 10px;\n"
+"    background-color: rgb(255, 101, 118);\n"
+"    border: 2px solid black;\n"
+"}\n"
+"QPushButton::hover {\n"
+"    background-color:  rgb(245, 85, 96);\n"
+"    border: 0px;\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    \n"
+"}\n"
+"QPushButton:disabled{\n"
+"    background-color:  rgb(123, 124, 125);\n"
+"    border: 2px solid black;\n"
+"}")
+        self.trash_all_button.setText("")
+        self.trash_all_button.setIcon(icon1)
+        self.trash_all_button.setIconSize(QtCore.QSize(18, 18))
+        self.trash_all_button.setObjectName("trash_all_button")
+        self.horizontalLayout.addWidget(self.trash_all_button, 0, QtCore.Qt.AlignLeft)
+        self.unsubscribe_button = QtWidgets.QPushButton(self.groupBox_4)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
         font.setPointSize(15)
@@ -225,7 +258,7 @@ class Ui_MainWindow(object):
         self.unsubscribe_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.unsubscribe_button.setStyleSheet("QPushButton {\n"
 "    border: 2px solid black;\n"
-"    width: 110px;\n"
+"    width: 30;\n"
 "    height: 25px;\n"
 "    color: black;\n"
 "    text-align: center;\n"
@@ -242,12 +275,13 @@ class Ui_MainWindow(object):
 "QPushButton:disabled{\n"
 "    background-color:  rgb(123, 124, 125);\n"
 "}")
+        self.unsubscribe_button.setText("")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("ui/../icons/unsubscribe.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.unsubscribe_button.setIcon(icon3)
         self.unsubscribe_button.setObjectName("unsubscribe_button")
-        self.verticalLayout_2.addWidget(self.unsubscribe_button)
-        self.refresh_button = QtWidgets.QPushButton(self.groupBox_2)
+        self.horizontalLayout.addWidget(self.unsubscribe_button, 0, QtCore.Qt.AlignLeft)
+        self.refresh_button = QtWidgets.QPushButton(self.groupBox_4)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
         font.setPointSize(15)
@@ -255,7 +289,7 @@ class Ui_MainWindow(object):
         self.refresh_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.refresh_button.setStyleSheet("QPushButton {\n"
 "    border: 2px solid black;\n"
-"    width: 110px;\n"
+"    width: 30px;\n"
 "    height: 25px;\n"
 "    color: black;\n"
 "    text-align: center;\n"
@@ -270,14 +304,15 @@ class Ui_MainWindow(object):
 "    \n"
 "}\n"
 "")
+        self.refresh_button.setText("")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("ui/../icons/refresh_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.refresh_button.setIcon(icon4)
         self.refresh_button.setObjectName("refresh_button")
-        self.verticalLayout_2.addWidget(self.refresh_button)
-        self.gridLayout_3.addWidget(self.groupBox_2, 0, 1, 2, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_3.addItem(spacerItem, 2, 1, 1, 1)
+        self.horizontalLayout.addWidget(self.refresh_button, 0, QtCore.Qt.AlignLeft)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem2)
+        self.gridLayout_3.addWidget(self.groupBox_4, 0, 0, 1, 1)
         self.sendersList = QtWidgets.QListWidget(self.all_senders_screen)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
@@ -318,7 +353,41 @@ class Ui_MainWindow(object):
         self.sendersList.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.sendersList.setViewMode(QtWidgets.QListView.ListMode)
         self.sendersList.setObjectName("sendersList")
-        self.gridLayout_3.addWidget(self.sendersList, 0, 0, 3, 1)
+        self.gridLayout_3.addWidget(self.sendersList, 1, 0, 4, 1)
+        self.subjectsList = QtWidgets.QListWidget(self.all_senders_screen)
+        self.subjectsList.setStyleSheet("QListWidget{\n"
+"background-color: transparent;\n"
+"}\n"
+"QListView::item:selected\n"
+"{\n"
+"background-color: rgb(173, 173, 173);\n"
+"}\n"
+"\n"
+"QListView::item:hover\n"
+"{\n"
+"border: 3px solid white;\n"
+"}\n"
+"QListView::item{\n"
+"margin-top: 3px;\n"
+"margin-bottom: 2px;\n"
+"margin-left: 5px;\n"
+"margin-right: 5px;\n"
+"spacing: 10px;\n"
+"border-radius: 10px;\n"
+"color: rgb(9, 1, 63);\n"
+"text-align: center;\n"
+"background-color: rgb(215, 215, 215);\n"
+"height: 45;\n"
+"\n"
+"}\n"
+"")
+        self.subjectsList.setObjectName("subjectsList")
+        self.gridLayout_3.addWidget(self.subjectsList, 1, 3, 4, 1)
+        self.line = QtWidgets.QFrame(self.all_senders_screen)
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.gridLayout_3.addWidget(self.line, 0, 2, 5, 1)
         self.stackedWidget.addWidget(self.all_senders_screen)
         self.loading_screen = QtWidgets.QWidget()
         font = QtGui.QFont()
@@ -361,8 +430,8 @@ class Ui_MainWindow(object):
         self.cancelButton.setIconSize(QtCore.QSize(18, 18))
         self.cancelButton.setObjectName("cancelButton")
         self.gridLayout_4.addWidget(self.cancelButton, 10, 0, 1, 1, QtCore.Qt.AlignHCenter)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_4.addItem(spacerItem1, 4, 0, 1, 1)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_4.addItem(spacerItem3, 4, 0, 1, 1)
         self.progressBar = QtWidgets.QProgressBar(self.loading_screen)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
@@ -391,8 +460,8 @@ class Ui_MainWindow(object):
         self.label_3.setStyleSheet("")
         self.label_3.setObjectName("label_3")
         self.gridLayout_4.addWidget(self.label_3, 5, 0, 1, 1, QtCore.Qt.AlignHCenter)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_4.addItem(spacerItem2, 9, 0, 1, 1)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_4.addItem(spacerItem4, 9, 0, 1, 1)
         self.count_label = QtWidgets.QLabel(self.loading_screen)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
@@ -420,194 +489,32 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.verticalLayout.addWidget(self.label_4, 0, QtCore.Qt.AlignHCenter)
         self.stackedWidget.addWidget(self.default_page)
-        self.subjects_page = QtWidgets.QWidget()
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        self.subjects_page.setFont(font)
-        self.subjects_page.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.subjects_page.setObjectName("subjects_page")
-        self.gridLayout_5 = QtWidgets.QGridLayout(self.subjects_page)
-        self.gridLayout_5.setObjectName("gridLayout_5")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_5.addItem(spacerItem3, 3, 6, 1, 1)
-        self.groupBox_3 = QtWidgets.QGroupBox(self.subjects_page)
-        self.groupBox_3.setMinimumSize(QtCore.QSize(0, 250))
+        self.gridLayout_2.addWidget(self.stackedWidget, 4, 1, 3, 9)
+        self.total_senders_label = QtWidgets.QLabel(self.groupBox)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
         font.setPointSize(15)
-        self.groupBox_3.setFont(font)
-        self.groupBox_3.setStyleSheet("\n"
-"QGroupBox{\n"
-"border: 1px solid grey;\n"
-"}")
-        self.groupBox_3.setTitle("")
-        self.groupBox_3.setObjectName("groupBox_3")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.groupBox_3)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.select_msgs_chkbox = QtWidgets.QCheckBox(self.groupBox_3)
+        self.total_senders_label.setFont(font)
+        self.total_senders_label.setStyleSheet("color: white;")
+        self.total_senders_label.setObjectName("total_senders_label")
+        self.gridLayout_2.addWidget(self.total_senders_label, 2, 7, 1, 1, QtCore.Qt.AlignRight)
+        self.accountsList = QtWidgets.QListWidget(self.groupBox)
+        self.accountsList.setMinimumSize(QtCore.QSize(0, 0))
+        self.accountsList.setMaximumSize(QtCore.QSize(16777215, 40))
         font = QtGui.QFont()
         font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.select_msgs_chkbox.setFont(font)
-        self.select_msgs_chkbox.setStyleSheet("color: white;")
-        self.select_msgs_chkbox.setObjectName("select_msgs_chkbox")
-        self.verticalLayout_3.addWidget(self.select_msgs_chkbox)
-        self.msg_sort_option = QtWidgets.QComboBox(self.groupBox_3)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.msg_sort_option.setFont(font)
-        self.msg_sort_option.setStyleSheet("color: white;")
-        self.msg_sort_option.setObjectName("msg_sort_option")
-        self.msg_sort_option.addItem("")
-        self.msg_sort_option.addItem("")
-        self.msg_sort_option.addItem("")
-        self.verticalLayout_3.addWidget(self.msg_sort_option)
-        self.delete_message_button = QtWidgets.QPushButton(self.groupBox_3)
-        self.delete_message_button.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.delete_message_button.setFont(font)
-        self.delete_message_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.delete_message_button.setStyleSheet("QPushButton {\n"
-"    width: 80px;\n"
-"    height: 25px;\n"
-"    color: black;\n"
-"    text-align: center;\n"
-"    border-radius: 10px;\n"
-"    background-color: rgb(255, 101, 118);\n"
-"    border: 2px solid black;\n"
-"}\n"
-"QPushButton::hover {\n"
-"    background-color:  rgb(245, 85, 96);\n"
-"    border: 0px;\n"
-"}\n"
-"QPushButton::pressed {\n"
-"    \n"
-"}\n"
-"QPushButton:disabled{\n"
-"    background-color:  rgb(123, 124, 125);\n"
-"    border: 2px solid black;\n"
-"}")
-        self.delete_message_button.setIcon(icon)
-        self.delete_message_button.setIconSize(QtCore.QSize(18, 18))
-        self.delete_message_button.setObjectName("delete_message_button")
-        self.verticalLayout_3.addWidget(self.delete_message_button)
-        self.trash_message_button = QtWidgets.QPushButton(self.groupBox_3)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.trash_message_button.setFont(font)
-        self.trash_message_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.trash_message_button.setStyleSheet("QPushButton {\n"
-"    width: 80px;\n"
-"    height: 25px;\n"
-"    color: black;\n"
-"    text-align: center;\n"
-"    border-radius: 10px;\n"
-"    background-color: rgb(255, 101, 118);\n"
-"    border: 2px solid black;\n"
-"}\n"
-"QPushButton::hover {\n"
-"    background-color:  rgb(245, 85, 96);\n"
-"    border: 0px;\n"
-"}\n"
-"QPushButton::pressed {\n"
-"    \n"
-"}\n"
-"QPushButton:disabled{\n"
-"    background-color:  rgb(123, 124, 125);\n"
-"    border: 2px solid black;\n"
-"}")
-        self.trash_message_button.setIcon(icon1)
-        self.trash_message_button.setIconSize(QtCore.QSize(18, 18))
-        self.trash_message_button.setObjectName("trash_message_button")
-        self.verticalLayout_3.addWidget(self.trash_message_button)
-        self.open_browser_bttn = QtWidgets.QPushButton(self.groupBox_3)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.open_browser_bttn.setFont(font)
-        self.open_browser_bttn.setStyleSheet("QPushButton {\n"
-"    width: 80px;\n"
-"    height: 25px;\n"
-"    color: black;\n"
-"    text-align: center;\n"
-"    border-radius: 10px;\n"
-"    background-color: rgba(30, 165, 255, 186);\n"
-"    border: 2px solid black;\n"
-"}\n"
-"QPushButton::hover {\n"
-"    background-color:  rgb(32, 96, 207);\n"
-"    border: 0px;\n"
-"}\n"
-"QPushButton::pressed {\n"
-"    \n"
-"}\n"
-"QPushButton:disabled{\n"
-"    background-color:  rgb(123, 124, 125);\n"
-"    border: 2px solid black;\n"
-"}")
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("ui/../icons/open_web.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.open_browser_bttn.setIcon(icon6)
-        self.open_browser_bttn.setIconSize(QtCore.QSize(18, 18))
-        self.open_browser_bttn.setObjectName("open_browser_bttn")
-        self.verticalLayout_3.addWidget(self.open_browser_bttn)
-        self.line_4 = QtWidgets.QFrame(self.groupBox_3)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        self.line_4.setFont(font)
-        self.line_4.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_4.setObjectName("line_4")
-        self.verticalLayout_3.addWidget(self.line_4)
-        self.backButton = QtWidgets.QPushButton(self.groupBox_3)
-        self.backButton.setMinimumSize(QtCore.QSize(90, 0))
-        self.backButton.setMaximumSize(QtCore.QSize(90, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(16)
+        font.setPointSize(13)
         font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setStrikeOut(False)
-        font.setKerning(True)
-        self.backButton.setFont(font)
-        self.backButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.backButton.setStyleSheet("QPushButton {\n"
-"    width: 30px;\n"
-"    height: 20px;\n"
-"    color: white;\n"
-"    text-align: center;\n"
-"    border-radius: 0px;\n"
-"    background-color: transparent;\n"
-"}\n"
-"QPushButton::hover {\n"
-"    text-decoration: underline;\n"
-"}\n"
-"QPushButton::pressed {\n"
-"    \n"
-"}\n"
-"")
-        icon = QtGui.QIcon.fromTheme("QStyle::SP_ArrowBack")
-        self.backButton.setIcon(icon)
-        self.backButton.setObjectName("backButton")
-        self.verticalLayout_3.addWidget(self.backButton, 0, QtCore.Qt.AlignHCenter)
-        self.gridLayout_5.addWidget(self.groupBox_3, 1, 6, 2, 1)
-        self.subjectsList = QtWidgets.QListWidget(self.subjects_page)
-        self.subjectsList.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.subjectsList.setFont(font)
-        self.subjectsList.setStyleSheet("QListWidget{\n"
+        self.accountsList.setFont(font)
+        self.accountsList.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.accountsList.setStyleSheet("QListView{\n"
 "background-color: transparent;\n"
+"border-left: 0.5px solid grey;\n"
 "}\n"
 "QListView::item:selected\n"
 "{\n"
 "background-color: rgb(173, 173, 173);\n"
+"border: 2px solid white;\n"
 "}\n"
 "\n"
 "QListView::item:hover\n"
@@ -615,7 +522,7 @@ class Ui_MainWindow(object):
 "border: 3px solid white;\n"
 "}\n"
 "QListView::item{\n"
-"margin-top: 3px;\n"
+"margin-top: 7px;\n"
 "margin-bottom: 2px;\n"
 "margin-left: 5px;\n"
 "margin-right: 5px;\n"
@@ -624,16 +531,19 @@ class Ui_MainWindow(object):
 "color: rgb(9, 1, 63);\n"
 "text-align: center;\n"
 "background-color: rgb(215, 215, 215);\n"
-"height: 45;\n"
+"height: 2;\n"
 "\n"
 "}\n"
 "")
-        self.subjectsList.setObjectName("subjectsList")
-        self.gridLayout_5.addWidget(self.subjectsList, 1, 0, 4, 6)
-        self.stackedWidget.addWidget(self.subjects_page)
-        self.gridLayout_2.addWidget(self.stackedWidget, 1, 1, 3, 3)
-        self.gridLayout.addWidget(self.groupBox, 1, 1, 6, 1)
-        self.addAcctButton = QtWidgets.QPushButton(self.centralwidget)
+        self.accountsList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.accountsList.setTextElideMode(QtCore.Qt.ElideMiddle)
+        self.accountsList.setFlow(QtWidgets.QListView.LeftToRight)
+        self.accountsList.setResizeMode(QtWidgets.QListView.Fixed)
+        self.accountsList.setViewMode(QtWidgets.QListView.ListMode)
+        self.accountsList.setObjectName("accountsList")
+        self.gridLayout_2.addWidget(self.accountsList, 2, 1, 1, 1, QtCore.Qt.AlignLeft)
+        self.addAcctButton = QtWidgets.QPushButton(self.groupBox)
+        self.addAcctButton.setMaximumSize(QtCore.QSize(40, 16777215))
         font = QtGui.QFont()
         font.setFamily("Montserrat")
         font.setPointSize(15)
@@ -641,8 +551,8 @@ class Ui_MainWindow(object):
         self.addAcctButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.addAcctButton.setStyleSheet("QPushButton {\n"
 "    border: 2px solid black;\n"
-"    width: 110px;\n"
-"    height: 25px;\n"
+"    width: 30px;\n"
+"    height: 35px;\n"
 "    color: black;\n"
 "    text-align: center;\n"
 "    border-radius: 10px;\n"
@@ -662,64 +572,14 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("ui/../icons/add_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.addAcctButton.setIcon(icon7)
+        self.addAcctButton.setText("")
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("ui/../icons/add_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.addAcctButton.setIcon(icon6)
         self.addAcctButton.setIconSize(QtCore.QSize(22, 22))
         self.addAcctButton.setObjectName("addAcctButton")
-        self.gridLayout.addWidget(self.addAcctButton, 3, 0, 2, 1)
-        self.line = QtWidgets.QFrame(self.centralwidget)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        self.line.setFont(font)
-        self.line.setStyleSheet("color: white;")
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
-        self.gridLayout.addWidget(self.line, 2, 0, 1, 1)
-        self.accountsList = QtWidgets.QListWidget(self.centralwidget)
-        self.accountsList.setMinimumSize(QtCore.QSize(132, 0))
-        self.accountsList.setMaximumSize(QtCore.QSize(140, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(13)
-        font.setBold(False)
-        self.accountsList.setFont(font)
-        self.accountsList.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.accountsList.setStyleSheet("QListView{\n"
-"min-width:130px;\n"
-"background-color: rgb(45, 34, 78);\n"
-"}\n"
-"QListView::item:selected\n"
-"{\n"
-"background-color: rgb(173, 173, 173);\n"
-"border: 3px solid white;\n"
-"}\n"
-"\n"
-"QListView::item:hover\n"
-"{\n"
-"border: 3px solid white;\n"
-"}\n"
-"QListView::item{\n"
-"margin-top: 7px;\n"
-"margin-bottom: 2px;\n"
-"margin-left: 5px;\n"
-"margin-right: 5px;\n"
-"spacing: 10px;\n"
-"border-radius: 10px;\n"
-"color: rgb(9, 1, 63);\n"
-"text-align: center;\n"
-"background-color: rgb(215, 215, 215);\n"
-"height: 30;\n"
-"\n"
-"}\n"
-"")
-        self.accountsList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.accountsList.setTextElideMode(QtCore.Qt.ElideMiddle)
-        self.accountsList.setViewMode(QtWidgets.QListView.ListMode)
-        self.accountsList.setObjectName("accountsList")
-        self.gridLayout.addWidget(self.accountsList, 1, 0, 1, 1)
-        self.action_label = QtWidgets.QLabel(self.centralwidget)
+        self.gridLayout_2.addWidget(self.addAcctButton, 2, 2, 1, 1)
+        self.action_label = QtWidgets.QLabel(self.groupBox)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
         font.setPointSize(19)
@@ -727,15 +587,12 @@ class Ui_MainWindow(object):
         self.action_label.setFont(font)
         self.action_label.setStyleSheet("color: white;")
         self.action_label.setObjectName("action_label")
-        self.gridLayout.addWidget(self.action_label, 0, 1, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: white;")
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.action_label, 2, 4, 1, 1, QtCore.Qt.AlignHCenter)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem5, 2, 3, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem6, 2, 6, 1, 1)
+        self.gridLayout.addWidget(self.groupBox, 0, 1, 5, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -745,33 +602,29 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Mail"))
-        self.total_senders_label.setText(_translate("MainWindow", "Senders: "))
         self.total_messages_label.setText(_translate("MainWindow", "Messages: "))
-        self.set_select_check.setText(_translate("MainWindow", "Select"))
-        self.sort_option.setCurrentText(_translate("MainWindow", "Newest"))
+        self.msg_sort_option.setItemText(0, _translate("MainWindow", "Newest"))
+        self.msg_sort_option.setItemText(1, _translate("MainWindow", "Oldest"))
+        self.msg_sort_option.setItemText(2, _translate("MainWindow", "Alphabetical"))
+        self.select_msgs_chkbox.setText(_translate("MainWindow", "Select"))
+        self.delete_message_button.setToolTip(_translate("MainWindow", "Delete this message"))
+        self.trash_message_button.setToolTip(_translate("MainWindow", "Trash this message."))
+        self.open_browser_bttn.setToolTip(_translate("MainWindow", "Open message in browser."))
         self.sort_option.setItemText(0, _translate("MainWindow", "Newest"))
         self.sort_option.setItemText(1, _translate("MainWindow", "Oldest"))
         self.sort_option.setItemText(2, _translate("MainWindow", "Alphabetical"))
-        self.delete_all_button.setText(_translate("MainWindow", "Delete All"))
-        self.trash_all_button.setText(_translate("MainWindow", "Trash All"))
-        self.view_msgs_button.setText(_translate("MainWindow", "View"))
-        self.unsubscribe_button.setText(_translate("MainWindow", "Unsubscribe"))
-        self.refresh_button.setText(_translate("MainWindow", "Refresh List"))
+        self.set_select_check.setText(_translate("MainWindow", "Select"))
+        self.delete_all_button.setToolTip(_translate("MainWindow", "Delete all messages from this sender."))
+        self.trash_all_button.setToolTip(_translate("MainWindow", "Trash all messages from this sender"))
+        self.unsubscribe_button.setToolTip(_translate("MainWindow", "Unsubscribe from this sender."))
+        self.refresh_button.setToolTip(_translate("MainWindow", "Fetch new messages."))
         self.cancelButton.setText(_translate("MainWindow", "Cancel"))
         self.label_3.setText(_translate("MainWindow", "Please Do Not Close The Application"))
         self.count_label.setText(_translate("MainWindow", "Waiting..."))
         self.label_4.setText(_translate("MainWindow", "Select or Add Account to Continue"))
-        self.select_msgs_chkbox.setText(_translate("MainWindow", "Select"))
-        self.msg_sort_option.setItemText(0, _translate("MainWindow", "Newest"))
-        self.msg_sort_option.setItemText(1, _translate("MainWindow", "Oldest"))
-        self.msg_sort_option.setItemText(2, _translate("MainWindow", "Alphabetical"))
-        self.delete_message_button.setText(_translate("MainWindow", "Delete"))
-        self.trash_message_button.setText(_translate("MainWindow", "Trash"))
-        self.open_browser_bttn.setText(_translate("MainWindow", "Open Browser"))
-        self.backButton.setText(_translate("MainWindow", "Back"))
-        self.addAcctButton.setText(_translate("MainWindow", "Add Account"))
+        self.total_senders_label.setText(_translate("MainWindow", "Senders: "))
+        self.addAcctButton.setToolTip(_translate("MainWindow", "Add account."))
         self.action_label.setText(_translate("MainWindow", "Messages"))
-        self.label_2.setText(_translate("MainWindow", "Accounts"))
 
 
 if __name__ == "__main__":

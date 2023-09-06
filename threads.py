@@ -12,6 +12,7 @@ class ProgressThread(QThread):
         super().__init__()
         self.ui = ui
         self.username = username
+        self.cancel.connect(lambda: self.terminate())
 
     def load_all_senders(self, username):
         user = GmailOp(username)

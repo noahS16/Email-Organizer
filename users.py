@@ -122,7 +122,7 @@ class User:
         db.update_account(self.inbox, self.username)
 
 
-class Users:
+class UsersCache:
     def __init__(self):
         self.records = {}
 
