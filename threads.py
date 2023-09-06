@@ -12,7 +12,8 @@ class ProgressThread(QThread):
         super().__init__()
         self.ui = ui
         self.username = username
-        self.cancel.connect(lambda: self.terminate())
+        self.cancel.connect(self.terminate)
+        self.parent = self
 
     def load_all_senders(self, username):
         user = GmailOp(username)
@@ -49,6 +50,7 @@ class DeleteSendersThread(QThread):
         super().__init__()
         self.senders = senders
         self.user = user
+        self.parent = self
 
     def run(self):
         self.open_load_screen.emit()
@@ -64,6 +66,7 @@ class TrashSendersThread(QThread):
         super().__init__()
         self.senders = senders
         self.user = user
+        self.parent = self
 
     def run(self):
         self.open_load_screen.emit()
@@ -80,6 +83,7 @@ class DeleteMessagesThread(QThread):
         self.ids = ids
         self.sender = sender
         self.user = user
+        self.parent = self
 
     def run(self):
         self.open_load_screen.emit()
@@ -96,6 +100,7 @@ class TrashMessagesThread(QThread):
         self.ids = ids
         self.sender = sender
         self.user = user
+        self.parent = self
 
     def run(self):
         self.open_load_screen.emit()

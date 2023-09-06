@@ -7,6 +7,61 @@ from infoRequestWindow import Ui_InfoRequestWindow
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from load_window import Ui_LoadWindow
+from users import UsersCache
+
+
+class UiData:
+    def __init__(self, ui):
+        self.ui = ui
+
+    def get_sender_sort_option(self):
+        return self.ui.sort_option.currentIndex()
+
+    def get_msg_sort_option(self):
+        return self.ui.msg_sort_option.currentIndex()
+
+    def sender_multiselect_checked(self):
+        return self.ui.set_select_check.isChecked()
+
+    def msg_multiselect_checked(self):
+        return self.ui.select_msgs_chkbox.isChecked()
+
+    def get_current_account(self):
+        return self.ui.accountsList.currentItem().text()
+
+    def get_selected_senders(self):
+        senders = self.ui.sendersList.selectedItems()
+        senders = [x.text() for x in senders]
+        return senders
+
+    def get_selected_messages(self):
+        messages = self.ui.subjectsList.selectedItems()
+        messages = [msg.text() for msg in messages]
+        return messages
+
+    def get_selected_msg_ids(self):
+        messages = self.ui.subjectsList.selectedItems()
+        ids = [x.get_id() for x in messages]
+        return ids
+
+    def set_sender_multiselect_option(self):
+        selectSendersChecked = self.ui.set_select_check.isChecked()
+        if selectSendersChecked:
+            self.ui.sendersList.setSelectionMode(QAbstractItemView.MultiSelection)
+        else:
+            self.ui.sendersList.setSelectionMode(QAbstractItemView.SingleSelection)
+
+    def set_message_multiselect_option(self):
+        selectMsgsChecked = self.ui.select_msgs_chkbox.isChecked()
+        if selectMsgsChecked:
+            self.ui.subjectsList.setSelectionMode(QAbstractItemView.MultiSelection)
+        else:
+            self.ui.subjectsList.setSelectionMode(QAbstractItemView.SingleSelection)
+
+    def update_progress_bar(self, total_emails, count):
+        self.ui.count_label.setText(
+            "Processing " + str(self.ui.progressBar.value()) + " of " + str(total_emails) + " emails")
+        self.ui.progressBar.setValue(count)
 
 
 class UiDataDisplay:
@@ -52,6 +107,65 @@ class UiDataDisplay:
         accounts = self.accounts_list.selectedItems()
         row = self.accounts_list.row(accounts[0])
         self.accounts_list.takeItem(row)
+
+
+class States:
+    def __init__(self, ui):
+        self.ui = ui
+
+    def default_state(self):
+        self.ui.stackedWidget.setCurrentIndex(0)
+        self.ui.groupBox.setEnabled(True)
+        self.ui.accountsList.setEnabled(True)
+        self.ui.addAcctButton.setEnabled(True)
+        self.update_buttons_sender_screen()
+        self.update_buttons_msgs_screen()
+
+    def loading_state(self):
+        self.ui.stackedWidget.setCurrentIndex(1)
+        self.ui.progressBar.setValue(0)
+        self.ui.accountsList.setEnabled(False)
+        self.ui.addAcctButton.setEnabled(False)
+        self.ui.total_senders_label.setText("")
+        self.ui.total_messages_label.setText("")
+        self.ui.action_label.setText("")
+
+    def update_buttons_sender_screen(self):
+        selected_items = self.ui.sendersList.selectedItems()
+        if not selected_items:
+            self.ui.delete_all_button.setEnabled(False)
+            self.ui.trash_all_button.setEnabled(False)
+            self.ui.unsubscribe_button.setEnabled(False)
+        elif len(selected_items) > 1:
+            self.ui.unsubscribe_button.setEnabled(False)
+            self.ui.delete_all_button.setEnabled(True)
+            self.ui.trash_all_button.setEnabled(True)
+        else:
+            self.ui.delete_all_button.setEnabled(True)
+            self.ui.trash_all_button.setEnabled(True)
+            self.ui.unsubscribe_button.setEnabled(True)
+
+    def update_buttons_msgs_screen(self):
+        selected_items = self.ui.subjectsList.selectedItems()
+        print(selected_items)
+        for msg in selected_items:
+            print(msg.get_subject(), msg.get_id())
+        if not selected_items:
+            self.ui.delete_message_button.setEnabled(False)
+            self.ui.trash_message_button.setEnabled(False)
+            self.ui.open_browser_bttn.setEnabled(False)
+        else:
+            self.ui.delete_message_button.setEnabled(True)
+            self.ui.trash_message_button.setEnabled(True)
+            self.ui.open_browser_bttn.setEnabled(True)
+        if len(selected_items) > 1:
+            self.ui.open_browser_bttn.setEnabled(False)
+
+    def set_ui_disabled(self):
+        self.ui.groupBox.setEnabled(False)
+
+    def set_ui_enabled(self):
+        self.ui.groupBox.setEnabled(True)
 
 
 class WindowsAndPopups:
@@ -112,71 +226,3 @@ class WindowsAndPopups:
         self.ui.loading_window.move(self.ui.loading_window.parent().geometry().center())
 
 
-class States:
-    def __init__(self, ui):
-        self.ui = ui
-
-    def default_state(self):
-        self.ui.stackedWidget.setCurrentIndex(0)
-        self.ui.groupBox.setEnabled(True)
-        self.update_buttons_sender_screen()
-        self.update_buttons_msgs_screen()
-
-    def loading_state(self):
-        self.ui.stackedWidget.setCurrentIndex(1)
-        self.ui.progressBar.setValue(0)
-        self.ui.accountsList.setEnabled(False)
-        self.ui.total_senders_label.setText("")
-        self.ui.total_messages_label.setText("")
-        self.ui.action_label.setText("")
-
-    def update_buttons_sender_screen(self):
-        selected_items = self.ui.sendersList.selectedItems()
-        if not selected_items:
-            self.ui.delete_all_button.setEnabled(False)
-            self.ui.trash_all_button.setEnabled(False)
-            self.ui.unsubscribe_button.setEnabled(False)
-        elif len(selected_items) > 1:
-            self.ui.unsubscribe_button.setEnabled(False)
-            self.ui.view_msgs_button.setEnabled(False)
-            self.ui.delete_all_button.setEnabled(True)
-            self.ui.trash_all_button.setEnabled(True)
-        else:
-            self.ui.delete_all_button.setEnabled(True)
-            self.ui.trash_all_button.setEnabled(True)
-            self.ui.unsubscribe_button.setEnabled(True)
-
-    def update_buttons_msgs_screen(self):
-        selected_items = self.ui.subjectsList.selectedItems()
-        for msg in selected_items:
-            print(msg.get_subject(), msg.get_id())
-        if not selected_items:
-            self.ui.delete_message_button.setEnabled(False)
-            self.ui.trash_message_button.setEnabled(False)
-            self.ui.open_browser_bttn.setEnabled(False)
-        else:
-            self.ui.delete_message_button.setEnabled(True)
-            self.ui.trash_message_button.setEnabled(True)
-            self.ui.open_browser_bttn.setEnabled(True)
-        if len(selected_items) > 1:
-            self.ui.open_browser_bttn.setEnabled(False)
-
-    def set_sender_multiselect_option(self):
-        selectSendersChecked = self.ui.set_select_check.isChecked()
-        if selectSendersChecked:
-            self.ui.sendersList.setSelectionMode(QAbstractItemView.MultiSelection)
-        else:
-            self.ui.sendersList.setSelectionMode(QAbstractItemView.SingleSelection)
-
-    def set_message_multiselect_option(self):
-        selectMsgsChecked = self.ui.select_msgs_chkbox.isChecked()
-        if selectMsgsChecked:
-            self.ui.subjectsList.setSelectionMode(QAbstractItemView.MultiSelection)
-        else:
-            self.ui.subjectsList.setSelectionMode(QAbstractItemView.SingleSelection)
-
-    def set_ui_disabled(self):
-        self.ui.groupBox.setEnabled(False)
-
-    def set_ui_enabled(self):
-        self.ui.groupBox.setEnabled(True)
