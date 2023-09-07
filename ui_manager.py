@@ -7,7 +7,6 @@ from infoRequestWindow import Ui_InfoRequestWindow
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from load_window import Ui_LoadWindow
-from users import UsersCache
 
 
 class UiData:
@@ -136,6 +135,7 @@ class States:
             self.ui.delete_all_button.setEnabled(False)
             self.ui.trash_all_button.setEnabled(False)
             self.ui.unsubscribe_button.setEnabled(False)
+            self.ui.subjectsList.clear()
         elif len(selected_items) > 1:
             self.ui.unsubscribe_button.setEnabled(False)
             self.ui.delete_all_button.setEnabled(True)

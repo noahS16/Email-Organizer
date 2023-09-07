@@ -1,13 +1,5 @@
 # THIS FILE UPDATES UI inboxWindow.py
-from infoRequestWindow import Ui_InfoRequestWindow
-from load_window import Ui_LoadWindow
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 from PyQt5 import QtCore
-from PyQt5.QtGui import QMovie
-import webbrowser
-import os
 from threads import *
 from ui_manager import *
 
@@ -69,7 +61,7 @@ class MainUi(QWidget):
         self.ui.total_messages_label.setText(f"Messages: {num_messages}")
 
     def update_header_label(self):
-        if not self.ui.sendersList.currentItem():
+        if len(self.data.get_selected_senders()) == 0:
             self.ui.action_label.setText("")
         else:
             sender = self.ui.sendersList.currentItem().text()
@@ -147,9 +139,14 @@ class MainUi(QWidget):
         user = self.users.records[username]
         senders = user.get_all_senders(sort=sort, rev=rev)
         self.painter.populate_senders(senders)
+        self.update_count_labels()
 
     def display_messages(self, rev=False, sort=False):
         username = self.data.get_current_account()
+        if len(self.data.get_selected_senders()) == 0:
+            self.update_header_label()
+            self.ui.subjectsList.clear()
+            return
         sender = self.data.get_selected_senders()[-1]
         user = self.users.records[username]
         messages = user.get_messages_from(sender, sort=sort, rev=rev)
@@ -160,12 +157,16 @@ class MainUi(QWidget):
         selected_senders = self.data.get_selected_senders()
         user = self.users.records[username]
         self.delete_senders_thread = DeleteSendersThread(selected_senders, user)
-        self.delete_senders_thread.open_load_screen.connect(self.window_popups.open_waiting_screen())
+        self.delete_senders_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.delete_senders_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
         self.delete_senders_thread.start()
+        self.delete_senders_thread.wait()
         self.painter.delete_senders()
         self.update_count_labels()
         self.update_header_label()
+        self.states.update_buttons_sender_screen()
+        self.states.update_buttons_msgs_screen()
+        self.process_msg_sort()
 
     def trash_senders(self):
         username = self.data.get_current_account()
@@ -175,9 +176,13 @@ class MainUi(QWidget):
         self.trash_senders_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.trash_senders_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
         self.trash_senders_thread.start()
+        self.trash_senders_thread.wait()
         self.painter.delete_senders()
         self.update_count_labels()
         self.update_header_label()
+        self.states.update_buttons_sender_screen()
+        self.states.update_buttons_msgs_screen()
+        self.process_msg_sort()
 
     def delete_messages(self):
         username = self.data.get_current_account()
@@ -185,12 +190,15 @@ class MainUi(QWidget):
         user = self.users.records[username]
         sender = self.data.get_selected_senders()[-1]
         self.delete_messages_thread = DeleteMessagesThread(msg_ids, sender, user)
-        self.delete_messages_thread.open_load_screen.connect(self.window_popups.open_waiting_screen())
+        self.delete_messages_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.delete_messages_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
         self.delete_messages_thread.start()
-        self.data_display.delete_messages()
+        self.delete_senders_thread.wait()
+        self.painter.delete_messages()
         self.update_count_labels()
         self.update_header_label()
+        self.states.update_buttons_msgs_screen()
+        self.states.update_buttons_sender_screen()
 
     def trash_messages(self):
         username = self.data.get_current_account()
@@ -201,19 +209,23 @@ class MainUi(QWidget):
         self.trash_messages_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.trash_messages_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
         self.trash_messages_thread.start()
+        self.trash_messages_thread.wait()
         self.painter.delete_messages()
         self.update_count_labels()
         self.update_header_label()
+        self.states.update_buttons_msgs_screen()
+        self.states.update_buttons_sender_screen()
 
     def refresh_inbox(self):
         self.states.loading_state()
         user = self.data.get_current_account()
         self.refresh_thread = ProgressThread(self.ui, user)
-        self.refresh_thread.update.connect(self.update_progress_bar)
+        self.refresh_thread.update.connect(self.data.update_progress_bar)
         self.refresh_thread.finished.connect(lambda: self.users.records[user].update_inbox())
-        self.refresh_thread.finished.connect(lambda: self.states.default_state())
+        self.refresh_thread.finished.connect(lambda: self.process_sender_sort())
         self.ui.cancelButton.clicked.connect(lambda: self.terminate_refresh())
         self.refresh_thread.start()
+        self.refresh_thread.wait()
         self.update_count_labels()
         self.update_header_label()
 

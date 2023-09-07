@@ -66,6 +66,87 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addItem(spacerItem1, 2, 5, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem2, 2, 6, 1, 1)
+        self.accountsList = QtWidgets.QListWidget(self.groupBox)
+        self.accountsList.setMinimumSize(QtCore.QSize(0, 0))
+        self.accountsList.setMaximumSize(QtCore.QSize(16777215, 40))
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(13)
+        font.setBold(False)
+        self.accountsList.setFont(font)
+        self.accountsList.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.accountsList.setStyleSheet("QListView{\n"
+"background-color: transparent;\n"
+"border-left: 0.5px solid grey;\n"
+"}\n"
+"QListView::item:selected\n"
+"{\n"
+"background-color: rgb(173, 173, 173);\n"
+"border: 2px solid white;\n"
+"}\n"
+"\n"
+"QListView::item:hover\n"
+"{\n"
+"border: 3px solid white;\n"
+"}\n"
+"QListView::item{\n"
+"margin-top: 7px;\n"
+"margin-bottom: 2px;\n"
+"margin-left: 5px;\n"
+"margin-right: 5px;\n"
+"spacing: 10px;\n"
+"border-radius: 10px;\n"
+"color: rgb(9, 1, 63);\n"
+"text-align: center;\n"
+"background-color: rgb(215, 215, 215);\n"
+"height: 2;\n"
+"\n"
+"}\n"
+"")
+        self.accountsList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.accountsList.setTextElideMode(QtCore.Qt.ElideMiddle)
+        self.accountsList.setFlow(QtWidgets.QListView.LeftToRight)
+        self.accountsList.setResizeMode(QtWidgets.QListView.Fixed)
+        self.accountsList.setViewMode(QtWidgets.QListView.ListMode)
+        self.accountsList.setObjectName("accountsList")
+        self.gridLayout_2.addWidget(self.accountsList, 2, 1, 1, 1, QtCore.Qt.AlignLeft)
+        self.addAcctButton = QtWidgets.QPushButton(self.groupBox)
+        self.addAcctButton.setMaximumSize(QtCore.QSize(40, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(15)
+        self.addAcctButton.setFont(font)
+        self.addAcctButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.addAcctButton.setStyleSheet("QPushButton {\n"
+"    border: 2px solid black;\n"
+"    width: 30px;\n"
+"    height: 35px;\n"
+"    color: black;\n"
+"    text-align: center;\n"
+"    border-radius: 10px;\n"
+"    background-color: rgb(203, 203, 203)\n"
+"}\n"
+"QPushButton::hover {\n"
+"    background-color:  rgb(123, 124, 125);\n"
+"    border: 0px;\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    \n"
+"}\n"
+"QPushButton:disabled{\n"
+"    background-color:  rgb(123, 124, 125);\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"")
+        self.addAcctButton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ui/../icons/add_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.addAcctButton.setIcon(icon)
+        self.addAcctButton.setIconSize(QtCore.QSize(22, 22))
+        self.addAcctButton.setObjectName("addAcctButton")
+        self.gridLayout_2.addWidget(self.addAcctButton, 2, 0, 1, 1)
         self.stackedWidget = QtWidgets.QStackedWidget(self.groupBox)
         self.stackedWidget.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
@@ -125,9 +206,9 @@ class Ui_MainWindow(object):
 "    border: 2px solid black;\n"
 "}")
         self.delete_message_button.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui/../icons/delete_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.delete_message_button.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ui/../icons/delete_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.delete_message_button.setIcon(icon1)
         self.delete_message_button.setObjectName("delete_message_button")
         self.horizontalLayout_2.addWidget(self.delete_message_button, 0, QtCore.Qt.AlignLeft)
         self.trash_message_button = QtWidgets.QPushButton(self.groupBox_5)
@@ -153,9 +234,9 @@ class Ui_MainWindow(object):
 "    border: 2px solid black;\n"
 "}")
         self.trash_message_button.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui/../icons/trash_bin.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.trash_message_button.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ui/../icons/trash_bin.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.trash_message_button.setIcon(icon2)
         self.trash_message_button.setObjectName("trash_message_button")
         self.horizontalLayout_2.addWidget(self.trash_message_button, 0, QtCore.Qt.AlignLeft)
         self.open_browser_bttn = QtWidgets.QPushButton(self.groupBox_5)
@@ -181,9 +262,9 @@ class Ui_MainWindow(object):
 "    border: 2px solid black;\n"
 "}")
         self.open_browser_bttn.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui/../icons/open_web.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.open_browser_bttn.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("ui/../icons/open_web.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.open_browser_bttn.setIcon(icon3)
         self.open_browser_bttn.setObjectName("open_browser_bttn")
         self.horizontalLayout_2.addWidget(self.open_browser_bttn, 0, QtCore.Qt.AlignLeft)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -236,7 +317,7 @@ class Ui_MainWindow(object):
 "    border: 2px solid black;\n"
 "}")
         self.delete_all_button.setText("")
-        self.delete_all_button.setIcon(icon)
+        self.delete_all_button.setIcon(icon1)
         self.delete_all_button.setIconSize(QtCore.QSize(18, 18))
         self.delete_all_button.setObjectName("delete_all_button")
         self.horizontalLayout.addWidget(self.delete_all_button, 0, QtCore.Qt.AlignLeft)
@@ -267,7 +348,7 @@ class Ui_MainWindow(object):
 "    border: 2px solid black;\n"
 "}")
         self.trash_all_button.setText("")
-        self.trash_all_button.setIcon(icon1)
+        self.trash_all_button.setIcon(icon2)
         self.trash_all_button.setIconSize(QtCore.QSize(18, 18))
         self.trash_all_button.setObjectName("trash_all_button")
         self.horizontalLayout.addWidget(self.trash_all_button, 0, QtCore.Qt.AlignLeft)
@@ -297,9 +378,9 @@ class Ui_MainWindow(object):
 "    background-color:  rgb(123, 124, 125);\n"
 "}")
         self.unsubscribe_button.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("ui/../icons/unsubscribe.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.unsubscribe_button.setIcon(icon3)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("ui/../icons/unsubscribe.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.unsubscribe_button.setIcon(icon4)
         self.unsubscribe_button.setObjectName("unsubscribe_button")
         self.horizontalLayout.addWidget(self.unsubscribe_button, 0, QtCore.Qt.AlignLeft)
         self.refresh_button = QtWidgets.QPushButton(self.groupBox_4)
@@ -326,9 +407,9 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.refresh_button.setText("")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("ui/../icons/refresh_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.refresh_button.setIcon(icon4)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("ui/../icons/refresh_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.refresh_button.setIcon(icon5)
         self.refresh_button.setObjectName("refresh_button")
         self.horizontalLayout.addWidget(self.refresh_button, 0, QtCore.Qt.AlignLeft)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -446,9 +527,9 @@ class Ui_MainWindow(object):
 "    border: 2px solid black;\n"
 "}\n"
 "")
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("ui/../icons/cancel_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.cancelButton.setIcon(icon5)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("ui/../icons/cancel_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.cancelButton.setIcon(icon6)
         self.cancelButton.setIconSize(QtCore.QSize(18, 18))
         self.cancelButton.setObjectName("cancelButton")
         self.gridLayout_4.addWidget(self.cancelButton, 10, 0, 1, 1, QtCore.Qt.AlignHCenter)
@@ -511,88 +592,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.verticalLayout.addWidget(self.label_4, 0, QtCore.Qt.AlignHCenter)
         self.stackedWidget.addWidget(self.default_page)
-        self.gridLayout_2.addWidget(self.stackedWidget, 4, 1, 3, 9)
-        self.accountsList = QtWidgets.QListWidget(self.groupBox)
-        self.accountsList.setMinimumSize(QtCore.QSize(0, 0))
-        self.accountsList.setMaximumSize(QtCore.QSize(16777215, 40))
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(13)
-        font.setBold(False)
-        self.accountsList.setFont(font)
-        self.accountsList.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.accountsList.setStyleSheet("QListView{\n"
-"background-color: transparent;\n"
-"border-left: 0.5px solid grey;\n"
-"}\n"
-"QListView::item:selected\n"
-"{\n"
-"background-color: rgb(173, 173, 173);\n"
-"border: 2px solid white;\n"
-"}\n"
-"\n"
-"QListView::item:hover\n"
-"{\n"
-"border: 3px solid white;\n"
-"}\n"
-"QListView::item{\n"
-"margin-top: 7px;\n"
-"margin-bottom: 2px;\n"
-"margin-left: 5px;\n"
-"margin-right: 5px;\n"
-"spacing: 10px;\n"
-"border-radius: 10px;\n"
-"color: rgb(9, 1, 63);\n"
-"text-align: center;\n"
-"background-color: rgb(215, 215, 215);\n"
-"height: 2;\n"
-"\n"
-"}\n"
-"")
-        self.accountsList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.accountsList.setTextElideMode(QtCore.Qt.ElideMiddle)
-        self.accountsList.setFlow(QtWidgets.QListView.LeftToRight)
-        self.accountsList.setResizeMode(QtWidgets.QListView.Fixed)
-        self.accountsList.setViewMode(QtWidgets.QListView.ListMode)
-        self.accountsList.setObjectName("accountsList")
-        self.gridLayout_2.addWidget(self.accountsList, 2, 1, 1, 1, QtCore.Qt.AlignLeft)
-        self.addAcctButton = QtWidgets.QPushButton(self.groupBox)
-        self.addAcctButton.setMaximumSize(QtCore.QSize(40, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Montserrat")
-        font.setPointSize(15)
-        self.addAcctButton.setFont(font)
-        self.addAcctButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.addAcctButton.setStyleSheet("QPushButton {\n"
-"    border: 2px solid black;\n"
-"    width: 30px;\n"
-"    height: 35px;\n"
-"    color: black;\n"
-"    text-align: center;\n"
-"    border-radius: 10px;\n"
-"    background-color: rgb(203, 203, 203)\n"
-"}\n"
-"QPushButton::hover {\n"
-"    background-color:  rgb(123, 124, 125);\n"
-"    border: 0px;\n"
-"}\n"
-"QPushButton::pressed {\n"
-"    \n"
-"}\n"
-"QPushButton:disabled{\n"
-"    background-color:  rgb(123, 124, 125);\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.addAcctButton.setText("")
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("ui/../icons/add_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.addAcctButton.setIcon(icon6)
-        self.addAcctButton.setIconSize(QtCore.QSize(22, 22))
-        self.addAcctButton.setObjectName("addAcctButton")
-        self.gridLayout_2.addWidget(self.addAcctButton, 2, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.stackedWidget, 4, 0, 3, 10)
         self.gridLayout.addWidget(self.groupBox, 0, 1, 5, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -606,6 +606,7 @@ class Ui_MainWindow(object):
         self.total_messages_label.setText(_translate("MainWindow", "Messages: "))
         self.action_label.setText(_translate("MainWindow", "Messages"))
         self.total_senders_label.setText(_translate("MainWindow", "Senders: "))
+        self.addAcctButton.setToolTip(_translate("MainWindow", "Add account."))
         self.msg_sort_option.setItemText(0, _translate("MainWindow", "Newest"))
         self.msg_sort_option.setItemText(1, _translate("MainWindow", "Oldest"))
         self.msg_sort_option.setItemText(2, _translate("MainWindow", "Alphabetical"))
@@ -625,7 +626,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Please Do Not Close The Application"))
         self.count_label.setText(_translate("MainWindow", "Waiting..."))
         self.label_4.setText(_translate("MainWindow", "Select or Add Account to Continue"))
-        self.addAcctButton.setToolTip(_translate("MainWindow", "Add account."))
 
 
 if __name__ == "__main__":
