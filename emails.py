@@ -23,8 +23,10 @@ class GmailOp:
 
     def gmail_authenticate(self, user):
         # insert_new_account(user)
+        if not os.path.exists('tokens/'):
+            os.mkdir('tokens')
         creds = None
-        path = 'creds/' + user + 'token.pickle'
+        path = 'tokens/' + user + 'token.pickle'
         # the file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first time
         if os.path.exists(path):

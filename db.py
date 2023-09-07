@@ -52,7 +52,7 @@ def get_subjects_by_sender(username, sender, sortAlph=False):
 
 
 def delete_account(username):
-    os.remove(os.path.abspath(f"creds/{username}token.pickle"))
+    os.remove(os.path.abspath(f"tokens/{username}token.pickle"))
     client = MongoClient(MONGODB_URI)
     db = client.cleanup
     users = db.users

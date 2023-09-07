@@ -2,6 +2,7 @@
 from PyQt5 import QtCore
 from threads import *
 from ui_manager import *
+from users import UsersCache
 
 
 class MainUi(QWidget):
@@ -23,7 +24,7 @@ class MainUi(QWidget):
             menu.addAction("Delete")
             if menu.exec_(event.globalPos()):
                 item = source.itemAt(event.pos())
-                self.worker.remove_account(item)
+                self.remove_account(item)
             return True
         return super().eventFilter(source, event)
 
@@ -97,7 +98,7 @@ class MainUi(QWidget):
         self.states.loading_state()
         self.modify_accounts_list(newUser)
         self.thread2 = ProgressThread(self.ui, newUser)
-        self.thread2.update.connect(self.update_progress_bar)
+        self.thread2.update.connect(self.data.update_progress_bar)
         self.thread2.finished.connect(lambda: self.users.add_user(newUser))
         self.thread2.finished.connect(lambda: self.users.records[newUser].update_inbox())
         self.thread2.finished.connect(lambda: self.states.default_state())
