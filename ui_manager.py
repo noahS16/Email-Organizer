@@ -81,7 +81,7 @@ class UiDataDisplay:
         self.message_list.clear()
         for msg in messages:
             self.message_list.addItem(msg)
-        self.states.update_buttons_sender_screen()
+        self.states.update_sender_screen()
         self.states.update_buttons_msgs_screen()
 
     def delete_senders(self):
@@ -91,7 +91,7 @@ class UiDataDisplay:
             self.sender_list.takeItem(row)
 
     def delete_messages(self):
-        self.states.update_buttons_sender_screen()
+        self.states.update_sender_screen()
         messages = self.message_list.selectedItems()
         for msg in messages:
             row = self.message_list.row(msg)
@@ -117,7 +117,7 @@ class States:
         self.ui.groupBox.setEnabled(True)
         self.ui.accountsList.setEnabled(True)
         self.ui.addAcctButton.setEnabled(True)
-        self.update_buttons_sender_screen()
+        self.update_sender_screen()
         self.update_buttons_msgs_screen()
 
     def loading_state(self):
@@ -129,7 +129,7 @@ class States:
         self.ui.total_messages_label.setText("")
         self.ui.action_label.setText("")
 
-    def update_buttons_sender_screen(self):
+    def update_sender_screen(self):
         selected_items = self.ui.sendersList.selectedItems()
         if not selected_items:
             self.ui.delete_all_button.setEnabled(False)
@@ -166,6 +166,20 @@ class States:
 
     def set_ui_enabled(self):
         self.ui.groupBox.setEnabled(True)
+
+    def update_count_labels(self, num_senders, num_messages):
+        self.ui.total_senders_label.setText(f"Senders: {num_senders}")
+        self.ui.total_messages_label.setText(f"Messages: {num_messages}")
+
+    def update_header_label(self, num_messages_from):
+        if len(self.ui.sendersList.selectedItems()) == 0:
+            self.ui.action_label.setText("")
+        else:
+            sender = self.ui.sendersList.currentItem().text()
+            grammar = "Messages." if num_messages_from > 1 else "Message."
+            text = f"{sender} | {num_messages_from} {grammar}"
+            self.ui.action_label.setText(text)
+
 
 
 class WindowsAndPopups:

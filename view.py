@@ -153,6 +153,12 @@ class MainUi(QWidget):
         messages = user.get_messages_from(sender, sort=sort, rev=rev)
         self.painter.populate_messages(messages)
 
+    def update_labels(self):
+        self.update_count_labels()
+        self.update_header_label()
+        self.states.update_sender_screen()
+        self.states.update_buttons_msgs_screen()
+
     def delete_senders(self):
         username = self.data.get_current_account()
         selected_senders = self.data.get_selected_senders()
@@ -160,13 +166,10 @@ class MainUi(QWidget):
         self.delete_senders_thread = DeleteSendersThread(selected_senders, user)
         self.delete_senders_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.delete_senders_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
+        self.delete_senders_thread.close_load_screen.connect(lambda: self.update_labels())
         self.delete_senders_thread.start()
-        self.delete_senders_thread.wait()
         self.painter.delete_senders()
-        self.update_count_labels()
-        self.update_header_label()
-        self.states.update_buttons_sender_screen()
-        self.states.update_buttons_msgs_screen()
+
         self.process_msg_sort()
 
     def trash_senders(self):
@@ -176,14 +179,10 @@ class MainUi(QWidget):
         self.trash_senders_thread = TrashSendersThread(senders, user)
         self.trash_senders_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.trash_senders_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
+        self.trash_senders_thread.close_load_screen.connect(lambda: self.update_labels())
         self.trash_senders_thread.start()
-        self.trash_senders_thread.wait()
         self.painter.delete_senders()
-        self.update_count_labels()
-        self.update_header_label()
-        self.states.update_buttons_sender_screen()
-        self.states.update_buttons_msgs_screen()
-        self.process_msg_sort()
+        #self.process_msg_sort()
 
     def delete_messages(self):
         username = self.data.get_current_account()
@@ -193,13 +192,9 @@ class MainUi(QWidget):
         self.delete_messages_thread = DeleteMessagesThread(msg_ids, sender, user)
         self.delete_messages_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.delete_messages_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
+        self.delete_messages_thread.close_load_screen.connect(lambda: self.update_labels())
         self.delete_messages_thread.start()
-        self.delete_senders_thread.wait()
         self.painter.delete_messages()
-        self.update_count_labels()
-        self.update_header_label()
-        self.states.update_buttons_msgs_screen()
-        self.states.update_buttons_sender_screen()
 
     def trash_messages(self):
         username = self.data.get_current_account()
@@ -209,13 +204,9 @@ class MainUi(QWidget):
         self.trash_messages_thread = TrashMessagesThread(msg_ids, sender, user)
         self.trash_messages_thread.open_load_screen.connect(lambda: self.window_popups.open_waiting_screen())
         self.trash_messages_thread.close_load_screen.connect(lambda: self.ui.loading_window.close())
+        self.trash_messages_thread.close_load_screen.connect(lambda: self.update_labels())
         self.trash_messages_thread.start()
-        self.trash_messages_thread.wait()
         self.painter.delete_messages()
-        self.update_count_labels()
-        self.update_header_label()
-        self.states.update_buttons_msgs_screen()
-        self.states.update_buttons_sender_screen()
 
     def refresh_inbox(self):
         self.states.loading_state()
@@ -226,7 +217,6 @@ class MainUi(QWidget):
         self.refresh_thread.finished.connect(lambda: self.process_sender_sort())
         self.ui.cancelButton.clicked.connect(lambda: self.terminate_refresh())
         self.refresh_thread.start()
-        self.refresh_thread.wait()
         self.update_count_labels()
         self.update_header_label()
 
