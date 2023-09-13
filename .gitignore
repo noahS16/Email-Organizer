@@ -1,4 +1,4 @@
 tokens
 creds/.env
-creds/.
-creds/..
+creds/credentials.json
+
