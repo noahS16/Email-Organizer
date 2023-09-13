@@ -1,0 +1,1 @@
+### This folder saves email http data to open emails in your browser. ###
