@@ -73,7 +73,7 @@ class User:
         self.inbox = db.get_all_messages(self.username)
 
     def delete_senders(self, senders):
-        print("SENDERS TO DELETE:", senders)
+        #print("SENDERS TO DELETE:", senders)
         gmail_user = GmailOp(self.username)
         ids = []
         for sender in senders:
@@ -84,7 +84,7 @@ class User:
         self.update_db()
 
     def trash_senders(self, senders):
-        print("SENDERS TO TRASH:", senders)
+        #print("SENDERS TO TRASH:", senders)
         gmail_user = GmailOp(self.username)
         ids = []
         for sender in senders:
@@ -95,7 +95,7 @@ class User:
         self.update_db()
 
     def remove_messages(self, message_ids, sender):
-        print("MESSAGES TO DELETE", message_ids, len(message_ids))
+        #print("MESSAGES TO DELETE", message_ids, len(message_ids))
         index = 0
         for msg in self.inbox[sender][:]:
             if msg['id'] in message_ids:

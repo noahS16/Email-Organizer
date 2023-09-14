@@ -32,8 +32,6 @@ class ProgressThread(QThread):
                 all_senders[sender] = [{"subject": info.get('subject'), "id": msg.get('id')}]
                 self.update.emit(len(messages), count)
             count += 1
-            # print('ADDED', count)
-        print(len(all_senders))
         db.insert_new_account(self.username)
         db.update_account(all_senders, username)
         self.finished.emit()

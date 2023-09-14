@@ -14,7 +14,7 @@ def insert_new_account(username):
     users = db.users
     new_account = {"username": username}
     result = users.update_one(new_account, {"$setOnInsert": new_account}, upsert=True)
-    print("INSERTED: ", result)
+    #print("INSERTED: ", result)
     client.close()
 
 
@@ -108,7 +108,7 @@ def delete_messages(username, sender, subjects):
         if messages[sender][index]['subject'] in subjects:
             msg = messages[sender].pop(index)
             msg_ids.append(msg['id'])
-            print("REMOVED::", msg)
+            #print("REMOVED::", msg)
             subjects.remove(msg['subject'])
             index -= 1
             if len(messages[sender]) == 0:

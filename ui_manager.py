@@ -147,9 +147,6 @@ class States:
 
     def update_buttons_msgs_screen(self):
         selected_items = self.ui.subjectsList.selectedItems()
-        print(selected_items)
-        for msg in selected_items:
-            print(msg.get_subject(), msg.get_id())
         if not selected_items:
             self.ui.delete_message_button.setEnabled(False)
             self.ui.trash_message_button.setEnabled(False)

@@ -238,7 +238,7 @@ class MainUi(QWidget):
         message = self.ui.subjectsList.currentItem().text()
         sender = self.ui.sendersList.currentItem().text()
         file_made = GmailOp(username).get_html_message(sender, message=message)
-        print(file_made)
+        #print(file_made)
         if not file_made:
             self.window_popups.no_html_data_popup()
             return

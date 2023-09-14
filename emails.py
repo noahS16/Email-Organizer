@@ -39,7 +39,7 @@ class GmailOp:
                 try:
                     creds.refresh(Request())
                 except google.auth.exceptions.RefreshError:
-                    print("ERROR")
+                    #print("ERROR")
                     os.remove(os.path.abspath(path))
                     flow = InstalledAppFlow.from_client_secrets_file('creds/credentials.json', GmailOp.SCOPES)
                     creds = flow.run_local_server(port=0)
@@ -66,8 +66,6 @@ class GmailOp:
             else:
                 all_senders[sender] = [info.get('subject')]
             count += 1
-            print('ADDED', count)
-        print(len(all_senders))
         return all_senders  # Return all message IDs --> [{id: '', threadId: ''},...]
 
     def get_all_messages(self, query=""):
@@ -82,7 +80,6 @@ class GmailOp:
                                                         pageToken=page_token).execute()
             if 'messages' in result:
                 messages.extend(result['messages'])
-        print(len(messages))
         connection.close()
         return messages
 
@@ -114,7 +111,6 @@ class GmailOp:
             else:
                 data[info.get('from')] = [data]
             count += 1
-            print(count)
         return data
 
     def add_header_value(self, name, value, info):

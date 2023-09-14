@@ -15,12 +15,15 @@ as you can now delete sender specific emails AND unsubscribe from those senders 
 * ### First Things First:
   * Clone this repository in your desired location
   * In order for you to be able to sign in to you Gmail account, you will need to create an **OAuth 2.0 client ID**.
-  Follow [this link](https://developers.google.com/workspace/guides/create-credentials#desktop-app) to create your ID. 
+  Follow [this link](https://developers.google.com/workspace/guides/create-credentials#desktop-app) to the **Google Cloud Console** to create your ID.
     * Click **Go to Credentials** under the **Oauth client ID credentials** section, and
     follow the steps provided in that same section to create your ID.
     * On the window that appears after you create your ID, click on **DOWNLOAD JSON** on the bottom.
     * Once the file is downloaded, rename it to **credentials.json**. If not renamed, the app will not run.
     * Place the renamed file in the ***creds*** folder located in the project files on your machine.
+    * Back in the Google Cloud Console in the menu on the left, click ***OAuth consent screen***
+    * Scroll down, and in the **Test users** section, click ***Add users***
+    * Enter the emails you will be using in the app to the test users list.
 * ### Dependencies:
     * **ARM architectures such as the Apple M1 chip are not supported.**
     * The following libraries will be needed to run this app:
@@ -36,10 +39,18 @@ as you can now delete sender specific emails AND unsubscribe from those senders 
 ## To Use
 * ### Add an Account:
   * Click the add account button located in the top left corner to add your first gmail account.
-  * Once prompted, enter **only your Gmail USERNAME** in the field provided.
+  * Once prompted, enter **only your Gmail USERNAME** in the field provided. The app will then begin fetching
+  all the emails from your inbox. This may take a while, depending on how many emails you have.
   * Proceed to log in to your Gmail account in your browser.
-    * If a warning is displayed, select the 'advanced' option on the left, then 'go to (***your OAuth ID name***)'.
   * Accounts may be deleted by right-clicking on the account you wish to delete.
   * Double-clicking on a message will open the message in your browser.
+* ### Troubleshooting:
+  * If a warning is displayed upon login, select the 'advanced' option on the left, then 'go to (***your OAuth ID name***)'.
+  * If the app quits, make sure the **Gmail API** is enabled in your [Google Cloud Console](https://console.cloud.google.com/apis/dashboard)
+    * Also make sure your OAuth 2.0 ID is stored correctly and with the correct name as mentioned above.
+
+---
+## License
+This project is licensed under the MIT License.
 
 ---
