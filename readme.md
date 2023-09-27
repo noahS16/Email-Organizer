@@ -31,8 +31,8 @@ as you can now delete sender specific emails AND unsubscribe from those senders 
       * [PyMongo](https://pypi.org/project/pymongo/)
       * [Google API](https://developers.google.com/gmail/api/reference/rest)
       * **MongoDB:** Must be installed and started on your machine. See [install mongodb](https://www.mongodb.com/docs/manual/administration/install-community/).
-    * From the command line, run ```pip3 install -r requirements.txt``` in the same directory as the repository to install all required libraries.
-      Use ```pip install -r requirements.txt``` if the above command fails.
+    * From the command line, run ```pip3 install --upgrade -r requirements.txt``` in the same directory as the repository to install all required libraries.
+      Use ```pip install --upgrade -r requirements.txt``` if the above command fails.
 * ### Run:
     * In the command line, navigate to the directory of the repository (if not already), and run ```python3 main.py``` from the command line.
 ---
